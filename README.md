@@ -245,11 +245,11 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="John Doe">
+                    <input type="text" id="name" placeholder="Enter Name">
                 </div>
                 <div class="form-group">
                     <label for="title">Professional Title</label>
-                    <input type="text" id="title" placeholder="Web Developer">
+                    <input type="text" id="title" placeholder="Enter your Profession">
                 </div>
             </div>
             
@@ -332,7 +332,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
             const generateBtn = document.getElementById('generateBtn');
             const previewSection = document.getElementById('previewSection');
             const nameInput = document.getElementById('name');
@@ -343,8 +342,6 @@
             const buttonColorInput = document.getElementById('buttonColor');
             const emailInput = document.getElementById('email');
             const contactTextInput = document.getElementById('contactText');
-            
-            // Preview Elements
             const profileHeader = document.getElementById('profileHeader');
             const profileImgPreview = document.getElementById('profileImgPreview');
             const profileName = document.getElementById('profileName');
@@ -353,8 +350,6 @@
             const profileContact = document.getElementById('profileContact');
             const headerColorPreview = document.getElementById('headerColorPreview');
             const buttonColorPreview = document.getElementById('buttonColorPreview');
-            
-            // Handle color input changes
             headerColorInput.addEventListener('input', function() {
                 headerColorPreview.style.backgroundColor = this.value;
             });
@@ -362,8 +357,6 @@
             buttonColorInput.addEventListener('input', function() {
                 buttonColorPreview.style.backgroundColor = this.value;
             });
-            
-            // Handle profile image upload
             profileImgInput.addEventListener('change', function() {
                 const file = this.files[0];
                 if (file) {
@@ -373,39 +366,25 @@
                         img.src = e.target.result;
                         profileImgPreview.innerHTML = '';
                         profileImgPreview.appendChild(img);
-                        
-                        // Update the image upload area too
                         const uploadArea = document.getElementById('imageUpload');
                         uploadArea.innerHTML = `
                             <input type="file" id="profileImg" accept="image/*">
                             <img src="${e.target.result}" alt="Profile">
                         `;
-                        // Reattach the event listener
                         document.getElementById('profileImg').addEventListener('change', arguments.callee);
                     };
                     reader.readAsDataURL(file);
                 }
             });
-            
-            // Generate profile
             generateBtn.addEventListener('click', function() {
-                // Update preview
-                profileName.textContent = nameInput.value || 'John Doe';
-                profileTitle.textContent = titleInput.value || 'Web Developer';
+                profileName.textContent = nameInput.value || 'Enter Name';
+                profileTitle.textContent = titleInput.value || 'Enter your Profession';
                 profileBio.textContent = bioInput.value || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam, felis quis viverra tincidunt, erat ipsum.';
-                
-                // Update colors
                 profileHeader.style.backgroundColor = headerColorInput.value;
                 profileContact.style.backgroundColor = buttonColorInput.value;
-                
-                // Update contact button
                 profileContact.textContent = contactTextInput.value || 'Contact Me';
                 profileContact.href = emailInput.value ? `mailto:${emailInput.value}` : '#';
-                
-                // Show preview section
                 previewSection.style.display = 'block';
-                
-                // Scroll to preview
                 previewSection.scrollIntoView({ behavior: 'smooth' });
             });
         });
